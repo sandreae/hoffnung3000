@@ -12,7 +12,7 @@ import { fetchResource } from '../actions/resources'
 import { numberToSlotSizeStrHuman } from '../../../common/utils/slots'
 import { translate } from '../../../common/services/i18n'
 
-const WrappedInfiniteList = asInfiniteListCalendar(CuratedEventListItem)
+const WrappedInfiniteList = asInfiniteListCalendar(CuratedEventListItem, null)
 
 class PlacesShow extends Component {
   static propTypes = {

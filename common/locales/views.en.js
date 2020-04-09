@@ -26,6 +26,7 @@ export default {
     createNewButton: 'Create place',
     createNewTitle: 'Create new place',
     eventsHeader: 'Events at this place',
+    noEvents: 'There are no events here yet',
     indexTitle: 'Places',
     isPrivatePlace: 'This place is not visible to the audience',
     locationHeader: 'Location',

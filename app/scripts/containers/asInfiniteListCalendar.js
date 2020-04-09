@@ -71,15 +71,21 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
 
     renderTagSelector() {
       if (this.props.defaultTags.length !== 0) {
+        if (TagSelector === null) {
+          return null
+        }
         const defaultTags = this.props.defaultTags.map(tag =>{
           return { label: tag, value: tag }
         })
         return (
-          <TagSelector
-            defaultTags={defaultTags}
-            tagArray={this.state.filterTags}
-            onChange={this.onTagFilterChange}
-          />
+          <div>
+            <h3>{ translate('views.events.tagSelectorTitle') }</h3>
+            <TagSelector
+              defaultTags={defaultTags}
+              tagArray={this.state.filterTags}
+              onChange={this.onTagFilterChange}
+            />
+          </div>
         )
       } return null
     }
@@ -115,30 +121,12 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
       )
     }
 
-    renderListItems() {
-      const { listItems, placeIdFilter } = this.props
-
-      if (!this.props.isLoading && listItems.length === 0) {
-        return (
-          <p className="infinite-list-container__spinner">
-            { translate('components.common.emptyList') }
-          </p>
-        )
-      }
-
+    renderListItems(listItems) {
       return listItems.map((item, index) => {
-        if ( placeIdFilter !== undefined ) {
-          if ( placeIdFilter !== item.placeId ) {
-            return null
-          }
-        }
-
         const previousItem = index > 0 ? listItems[index - 1] : null
-
         const dateA = DateTime.fromISO(item.slots[0].from)
         const dateB = previousItem && DateTime.fromISO(previousItem.slots[0].from)
         const isSameDay = previousItem ? dateA.hasSame(dateB, 'day') : false
-
         const itemComponent = (
           <div
             className="infinite-list-container__item"
@@ -173,26 +161,41 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
     }
 
     renderEventList() {
+      const { placeIdFilter } = this.props
       const paginatedListItems = this.props.listItems
       const allEventsList = this.props.resourceListItems
+      const filterTags = this.state.filterTags
+      let filteredListItems = []
 
-      if (!this.props.isLoading && (paginatedListItems.length === 0 || allEventsList.length === 0)) {
+      // filter allEventsList by array of tags
+      if (filterTags.length !== 0) {
+        filteredListItems = allEventsList.filter(event => {
+          if (event.tags) {
+            return event.tags.some(tag => filterTags.includes(tag))
+          }
+          return null
+        })
+      }
+
+      // filter events by placeId
+      if ( placeIdFilter !== undefined ) {
+        filteredListItems = allEventsList.filter(event => {
+          if (event.placeId === placeIdFilter) {
+            return event
+          }
+          return null
+        })
+      }
+
+      if (!this.props.isLoading && (paginatedListItems.length === 0 || allEventsList.length === 0 || filteredListItems.length === 0)) {
         return (
           <p className="infinite-list-container__spinner">
-            { translate('components.common.emptyList') }
+            { translate('views.places.noEvents') }
           </p>
         )
       }
 
-      // filter allEventsList by array of tags
-      const filterTags = this.state.filterTags
-      const filteredListItems = allEventsList.filter(event => {
-        if (event.tags) {
-          return event.tags.some(tag => filterTags.includes(tag))
-        }
-        return null
-      })
-      if (filterTags.length !== 0) {
+      if (filterTags.length !== 0 || placeIdFilter !== undefined) {
         // show filtered list
         return this.renderListItems(filteredListItems)
       }
@@ -203,11 +206,9 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
     render() {
       return (
         <div className="infinite-list-container__item infinite-list-container__item--full">
-          <h3>{ translate('views.events.tagSelectorTitle') }</h3>
           { this.renderTagSelector() }
           <div className="infinite-list-container infinite-list-container--half-items">
             { this.renderEventList() }
-
             <div className="infinite-list-container__item infinite-list-container__item--full">
               { this.renderLoadMoreButton() }
             </div>
