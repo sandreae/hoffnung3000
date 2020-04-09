@@ -19,6 +19,7 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
       listItems: PropTypes.array,
       onClick: PropTypes.func,
       onEditClick: PropTypes.func,
+      placeIdFilter: PropTypes.number,
       resourceListItems: PropTypes.array,
       resourceName: PropTypes.string.isRequired,
       totalPageCount: PropTypes.number,
@@ -31,6 +32,7 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
       listItems: [],
       onClick: undefined,
       onEditClick: undefined,
+      placeIdFilter: undefined,
       resourceListItems: [],
       totalPageCount: undefined,
     }
@@ -87,6 +89,7 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
         <WrappedListItemComponent
           className="list-item--half"
           item={item}
+          placeIdFilter={this.props.placeIdFilter}
           onClick={this.props.onClick}
           onEditClick={this.props.onEditClick}
         />
@@ -112,8 +115,24 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
       )
     }
 
-    renderListItems(listItems) {
+    renderListItems() {
+      const { listItems, placeIdFilter } = this.props
+
+      if (!this.props.isLoading && listItems.length === 0) {
+        return (
+          <p className="infinite-list-container__spinner">
+            { translate('components.common.emptyList') }
+          </p>
+        )
+      }
+
       return listItems.map((item, index) => {
+        if ( placeIdFilter !== undefined ) {
+          if ( placeIdFilter !== item.placeId ) {
+            return null
+          }
+        }
+
         const previousItem = index > 0 ? listItems[index - 1] : null
 
         const dateA = DateTime.fromISO(item.slots[0].from)
@@ -210,6 +229,7 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
   function mapStateToProps(state, props) {
     return {
       ...state.infiniteList[props.resourceName],
+      ...state.infiniteList[props.placeIdFilter],
       ...state.resourceList,
       ...state.meta.config,
 
