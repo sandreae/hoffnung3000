@@ -160,6 +160,14 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
       })
     }
 
+    renderNoEvent() {
+      return (
+        <p className="infinite-list-container__spinner">
+          { translate('views.places.noEvents') }
+        </p>
+      )
+    }
+
     renderEventList() {
       const { placeIdFilter } = this.props
       const paginatedListItems = this.props.listItems
@@ -187,15 +195,14 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
         })
       }
 
-      if (!this.props.isLoading && (paginatedListItems.length === 0 || allEventsList.length === 0 || filteredListItems.length === 0)) {
-        return (
-          <p className="infinite-list-container__spinner">
-            { translate('views.places.noEvents') }
-          </p>
-        )
+      if (!this.props.isLoading && paginatedListItems.length === 0) {
+        return this.renderNoEvent()
       }
 
       if (filterTags.length !== 0 || placeIdFilter !== undefined) {
+        if (filteredListItems.length === 0) {
+          return this.renderNoEvent()
+        }
         // show filtered list
         return this.renderListItems(filteredListItems)
       }
