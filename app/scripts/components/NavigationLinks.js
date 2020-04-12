@@ -18,7 +18,7 @@ const SECONDARY_NAVIGATION = [
 
 const CURATION_NAVIGATION = [
   { localeKey: 'places', url: '/places' },
-  { localeKey: 'Der Markt', url: '/resources', withConfig: 'isDerMarktEnabled' },
+  { localeKey: 'resources', url: '/resources', withConfig: 'isDerMarktEnabled' },
   { localeKey: 'resources', url: '/pages/resources-info' },
   { localeKey: 'stream', url: '/stream', withConfig: 'gifStreamServerUrl' },
 ]
