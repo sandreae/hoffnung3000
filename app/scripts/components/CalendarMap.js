@@ -67,7 +67,7 @@ class CalendarMap extends Component {
         </tr>
       ))
       return (
-        <Popup>
+        <Popup maxHeight="250">
           <b>{place}</b><br />
           <table>
             <tbody>
@@ -111,7 +111,7 @@ class CalendarMap extends Component {
       >
         <VenueMapTileLayer />
         <Marker icon={customMarker} position={this.state.position}>
-          <EventListPopup events={this.props.virtualEvents} place={'VIRTUAL REALITY'} onPopupClick={this.onPopupClick} />
+          <EventListPopup events={this.props.virtualEvents} place={'ONLINE EVENTS'} onPopupClick={this.onPopupClick} />
         </Marker>
         <VenueMarkers markers={this.props.plots} />
       </Map>
