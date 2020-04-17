@@ -146,7 +146,7 @@ export default {
       titleRequired: 'Please give your event a title',
       validUrl: 'Please enter website in this format: "https://website.com"',
     },
-    areEventsPublic: 'This event is visible in the calendar and to the public.',
+    areEventsPublic: 'I want this event to be visible in the calendar and to the public (x = public).',
     description: 'Description',
     pickResources: 'Which resources?',
     placeIsPrivate: 'Please note that the selected place is already private',
