@@ -472,7 +472,7 @@ export default {
         order: [
           [EventHasManySlots, 'from', 'ASC'],
         ],
-        where: req.user.isVisitor ? { isPublic: true } : {},
+        where: req.user.isVisitor === undefined ? { isPublic: true } : {},
       })
         .then(result => {
           return getConfig('isAnonymizationEnabled').then(config => {
@@ -497,7 +497,7 @@ export default {
       order: [
         [EventHasManySlots, 'from', 'ASC'],
       ],
-      where: req.user.isVisitor ? { isPublic: true } : {},
+      where: req.user.isVisitor === undefined ? { isPublic: true } : {},
     })
       .then(result => {
         return getConfig('isAnonymizationEnabled').then(config => {
