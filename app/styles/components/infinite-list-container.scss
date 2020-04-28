@@ -34,7 +34,7 @@ $_modal-header-height: 55px;
   font-size: $font-size-xl;
 }
 
-@include media-breakpoint(xs) {
+@include media-breakpoint(md) {
   .infinite-list-container--half-items {
     .infinite-list-container__item {
       width: 250px;
