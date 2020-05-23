@@ -497,6 +497,7 @@ export default {
       order: [
         [EventHasManySlots, 'from', 'ASC'],
       ],
+      subQuery: false,
       where: req.user.isVisitor === undefined ? { isPublic: true } : {},
     })
       .then(result => {
