@@ -57,6 +57,10 @@ export default function asSimpleEventList(WrappedListItemComponent) {
         const dateA = DateTime.fromISO(item.slots[0].from)
         const dateB = previousItem && DateTime.fromISO(previousItem.slots[0].from)
         const isSameDay = previousItem ? dateA.hasSame(dateB, 'day') : false
+        const festivalStartDate = DateTime.fromObject({ year: 2020, month: 6, day: 5 })
+        console.log(dateA)
+        console.log(festivalStartDate)
+
         const itemComponent = (
           <div
             className="simple-list-container__item"
@@ -65,6 +69,10 @@ export default function asSimpleEventList(WrappedListItemComponent) {
             { this.renderListItemContent(item) }
           </div>
         )
+
+        if (dateA < festivalStartDate) {
+          return null
+        }
 
         if (isSameDay) {
           return itemComponent
@@ -106,6 +114,7 @@ export default function asSimpleEventList(WrappedListItemComponent) {
     render() {
       return (
         <div className="simple-list-container__item simple-list-container__item--full">
+          <h1>FESTIVAL SCHEDULE</h1>
           <div className="simple-list-container simple-list-container--half-items">
             { this.renderEventList() }
           </div>
