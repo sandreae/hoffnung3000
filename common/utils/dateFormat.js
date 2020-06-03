@@ -23,3 +23,22 @@ export function formatEventTime(from, to) {
 
   return `${fromDateStr} ${fromTimeStr} - ${toStr}`
 }
+
+export function formatSimpleEventTime(from, to) {
+  const dateFrom = DateTime.fromISO(from, { zone: 'utc' })
+  const dateTo = DateTime.fromISO(to, { zone: 'utc' })
+
+  const fromDateStr = dateFrom.toFormat(DATE_FORMAT)
+  const fromTimeStr = dateFrom.toFormat(TIME_FORMAT)
+  const toTimeStr =  dateTo.toFormat(TIME_FORMAT)
+
+  const eventTime = { fromDateStr, fromTimeStr, toTimeStr }
+
+  if (dateFrom.hasSame(dateTo, 'day')) {
+    eventTime.toDateStr = ''
+  } else {
+    eventTime.toDateStr = dateTo.toFormat(DATE_FORMAT)
+  }
+
+  return eventTime
+}
