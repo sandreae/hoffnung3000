@@ -20,7 +20,6 @@ class Calendar extends Component {
     isAuthenticated: PropTypes.bool.isRequired,
     isParticipant: PropTypes.bool.isRequired,
     push: PropTypes.func.isRequired,
-    resourceListItems: PropTypes.array.isRequired,
   }
 
   static defaultProps = {
