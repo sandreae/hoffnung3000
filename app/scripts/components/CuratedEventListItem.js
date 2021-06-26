@@ -5,6 +5,8 @@ import { asInfiniteListItem, withAuthState } from '../containers'
 import { formatEventTime } from '../../../common/utils/dateFormat'
 import { translate } from '../../../common/services/i18n'
 
+const PREVIEW_TEXT_LENGTH = 250
+
 class CuratedEventListItem extends Component {
   static propTypes = {
     config: PropTypes.object.isRequired,
@@ -54,8 +56,22 @@ class CuratedEventListItem extends Component {
         </div>
 
         { this.renderPlaceName() }
+
+        <div>
+          <div className="list-item-content__description">{ this.previewText() }</div>
+        </div>
       </div>
     )
+  }
+
+  previewText() {
+    const text = this.props.item.description
+
+    if (text.length < PREVIEW_TEXT_LENGTH) {
+      return text
+    }
+
+    return `${text.substring(0, PREVIEW_TEXT_LENGTH)}...`
   }
 }
 
