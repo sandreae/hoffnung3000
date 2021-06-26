@@ -23,7 +23,6 @@ import {
   EventsNew,
   EventsShow,
   ForgotPassword,
-  Home,
   Login,
   NotFound,
   Page,
@@ -46,7 +45,7 @@ export default class Routes extends Component {
     return (
       <main role="main">
         <Switch>
-          <Route component={Home} exact={true} path="/" />
+          <Route component={Calendar} exact={true} path="/" />
           <Route component={shouldNotBeAuthenticated(Login)} path="/login" />
           <Route component={withConfig('isSignUpParticipantEnabled', shouldNotBeAuthenticated(Register))} path="/register" />
           <Route component={withConfig('isSignUpVisitorEnabled', shouldNotBeAuthenticated(Tickets))} path="/tickets" />
