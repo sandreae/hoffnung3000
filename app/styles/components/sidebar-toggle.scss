@@ -4,9 +4,14 @@
 }
 
 .sidebar-toggle {
-  background-image: url("/static/disaster-icon.png");
-  background-size: contain;
+  background-image: url("/static/explosion.svg");
+  background-size: cover;
   background-repeat: no-repeat;
+  
+  padding-top: 20px;
+  text-align: center;
+
+  color: red;
   
   border-radius: 50%;
 
@@ -39,6 +44,13 @@
     transition: all .2s ease-in-out;
   }
 }
+
+@include media-breakpoint(xs) {
+  .sidebar-toggle {
+    color: transparent;
+  }
+}
+
 
 .sidebar-toggle--active {
   background-color: $white;
