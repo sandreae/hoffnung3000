@@ -39,6 +39,7 @@ export default {
     indexTitle: 'Der Markt',
   },
   events: {
+    mapTitle: 'Map',
     calendarTitle: 'Calendar',
     createNewButton: 'Create event',
     createNewTitle: 'Create new event',
