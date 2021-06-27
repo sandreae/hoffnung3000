@@ -71,7 +71,7 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
     }
 
     renderTagSelector() {
-      if (this.props.defaultTags.length === 0) {
+      if (!this.props.defaultTags || this.props.defaultTags.length === 0) {
         return null
       }
 
