@@ -85,7 +85,7 @@ class UserForm extends Component {
         <Field
           component={FormInput}
           disabled={this.props.isLoading}
-          label="Mobile phone number (optional)"
+          label="Mobile phone number"
           name="phone"
           type="text"
         />
