@@ -95,9 +95,8 @@ class Calendar extends Component {
   render() {
     return (
       <section>
-        <h1>{ translate('views.events.calendarTitle') }</h1>
-        { this.renderText() }
         { this.renderCreateButton() }
+        { this.renderText() }
         { this.renderItemsList() }
       </section>
     )
