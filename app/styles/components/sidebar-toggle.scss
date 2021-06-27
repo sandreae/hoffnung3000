@@ -47,7 +47,9 @@
 
 @include media-breakpoint(xs) {
   .sidebar-toggle {
-    margin-top: 20px;
+    margin-top: 5px;
+    padding-top: 12px;
+    font-size: $font-size-sm;
   }
 }
 

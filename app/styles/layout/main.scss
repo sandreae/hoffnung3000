@@ -6,9 +6,17 @@ main {
   text-align: center;
 }
 
+@include media-breakpoint(md) {
+  main {
+    padding-top: 110px;
+    padding-right: $page-margin-mobile;
+    padding-left: $page-margin-mobile;
+  }
+}
+
 @include media-breakpoint(xs) {
   main {
-    padding-top: 60px;
+    padding-top: 80px;
     padding-right: $page-margin-mobile;
     padding-left: $page-margin-mobile;
   }
