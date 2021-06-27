@@ -255,7 +255,10 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
 
       if (filterDates.length !== 0 || filterTags.length !== 0 || filterPlaces.length !== 0 ) {
         // show filtered list
-        return this.renderListItems(filteredListItems)
+        if (filteredListItems.length != 0) {
+          return this.renderListItems(filteredListItems)
+        }
+        return (<h3>No events for this filter</h3>)
       }
 
       // show paginated list
@@ -266,9 +269,9 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
       return (
         <div className="infinite-list-container__item infinite-list-container__item--full">
           <div className="tags-wrapper">
-            { this.renderTagSelector() }
             { this.renderDateSelector() }
             { this.renderPlaceSelector() }
+            { this.renderTagSelector() }
           </div>
 
           <div className="infinite-list-container infinite-list-container--half-items">

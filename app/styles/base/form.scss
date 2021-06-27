@@ -7,17 +7,15 @@ form {
 }
 
 .tag {
-  padding: 5px;
+  padding: 2px;
 
   font-weight: $font-weight-bold;
-  font-size: $font-size-sm;
+  font-size: $font-size-md;
 
   text-transform: uppercase;
 
   cursor: pointer;
   
-  align-self: center;
-
   &:focus,
   &:hover {
     background-color: $gray-light;
@@ -33,6 +31,7 @@ form {
   
   flex-wrap: wrap;
   justify-content: center;
+  align-items:flex-start;
   
   background-color: rgba($lime, .2);
 }
@@ -42,12 +41,6 @@ form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.tags-wrapper > .tag-container:nth-of-type(1n+2) {
-  max-width: 50%;
-  min-width: 30px;
-  flex: 1 1;
 }
 
 .tag--selected {
