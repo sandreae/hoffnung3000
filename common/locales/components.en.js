@@ -1,6 +1,6 @@
 export default {
   common: {
-    agreeWithTerms: 'I agree with the terms',
+    agreeWithTerms: 'This sounds good to me!',
     emptyList: 'Nothing to do here yet ...',
     freeCheckout: 'Register',
     nextStep: 'Next step',
