@@ -54,6 +54,10 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
       return this.setState({ filterDates: selectedDates })
     }
 
+    onPlaceFilterChange(selectedPlaces) {
+      return this.setState({ filterPlaces: selectedPlaces })
+    }
+
     renderSpinner() {
       if (!this.props.isLoading) {
         return null
@@ -93,7 +97,7 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
     }
 
     renderDateSelector() {
-      const eventDates = this.props.listItems.map(event => DateTime.fromISO(event.slots[0].from).toFormat('dd-MMM'))
+      const eventDates = this.props.resourceListItems.map(event => DateTime.fromISO(event.slots[0].from).toFormat('dd-MMM'))
         .sort((a, b) => new Date(a) - new Date(b))
         .filter((v, i, a) => a.indexOf(v) === i)
         .map(date => {return { label: date, value: date }})
@@ -104,6 +108,29 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
             defaultTags={eventDates}
             tagArray={this.state.filterDates}
             onChange={this.onDateFilterChange}
+          />
+
+          <hr />
+        </Fragment>
+      )
+    }
+
+    renderPlaceSelector() {
+      const uniqueCity = this.props.resourceListItems
+        .map(event => event.place.city)
+        .filter((v, i, a) => a.indexOf(v) === i)
+        .map(location => {return { label: location, value: location }})
+
+      uniqueCity.push({ label: 'online', value: 'virtual' })
+      uniqueCity.push({ label: 'IRL', value: 'irl' })
+
+      return (
+        <Fragment>
+
+          <TagSelector
+            defaultTags={uniqueCity}
+            tagArray={this.state.filterPlaces}
+            onChange={this.onPlaceFilterChange}
           />
 
           <hr />
@@ -220,7 +247,19 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
         })
       }
 
-      if (filterDates.length !== 0 || filterTags.length !== 0) {
+      // filter allEventsList by array of places
+      const filterPlaces = this.state.filterPlaces
+      if (filterPlaces.length !== 0) {
+        const isIRL = filterPlaces.includes('irl')
+        filteredListItems = filteredListItems.filter(event => {
+          if (isIRL && event.place.mode !== 'virtual') {
+            return true
+          }
+          return filterPlaces.includes(event.place.city) || filterPlaces.includes(event.place.mode)
+        })
+      }
+
+      if (filterDates.length !== 0 || filterTags.length !== 0 || filterPlaces.length !== 0 ) {
         // show filtered list
         return this.renderListItems(filteredListItems)
       }
@@ -234,6 +273,7 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
         <div className="infinite-list-container__item infinite-list-container__item--full">
           { this.renderTagSelector() }
           { this.renderDateSelector() }
+          { this.renderPlaceSelector() }
 
           <div className="infinite-list-container infinite-list-container--half-items">
             { this.renderEventList() }
@@ -259,8 +299,10 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
       this.state = {
         filterTags: [],
         filterDates: [],
+        filterPlaces: [],
       }
 
+      this.onPlaceFilterChange = this.onPlaceFilterChange.bind(this)
       this.onDateFilterChange = this.onDateFilterChange.bind(this)
       this.onTagFilterChange = this.onTagFilterChange.bind(this)
       this.onLoadMoreClick = this.onLoadMoreClick.bind(this)
