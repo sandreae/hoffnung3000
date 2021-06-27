@@ -32,7 +32,7 @@ export default {
     changePassword: 'Change your password',
     changePasswordButton: 'Update',
     city: 'City',
-    cityCode: 'City code',
+    cityCode: 'Postcode',
     country: 'Country',
     email: 'Your email address',
     firstname: 'Firstname',
