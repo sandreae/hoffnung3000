@@ -255,7 +255,7 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
 
       if (filterDates.length !== 0 || filterTags.length !== 0 || filterPlaces.length !== 0 ) {
         // show filtered list
-        if (filteredListItems.length != 0) {
+        if (filteredListItems.length !== 0) {
           return this.renderListItems(filteredListItems)
         }
         return (<h3>No events for this filter</h3>)
