@@ -10,11 +10,13 @@ form {
   padding: 5px;
 
   font-weight: $font-weight-bold;
-  font-size: $font-size-base;
+  font-size: $font-size-sm;
 
   text-transform: uppercase;
 
   cursor: pointer;
+  
+  align-self: center;
 
   &:focus,
   &:hover {
@@ -24,11 +26,28 @@ form {
 
 .tag-container {
   display: flex;
-
-  width: 100%;
-
+  
+  min-width: 100%;
+  
+  margin: 5px;
+  
   flex-wrap: wrap;
   justify-content: center;
+  
+  background-color: rgba($lime, .2);
+}
+
+.tags-wrapper {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tags-wrapper > .tag-container:nth-of-type(1n+2) {
+  max-width: 50%;
+  min-width: 30px;
+  flex: 1 1;
 }
 
 .tag--selected {

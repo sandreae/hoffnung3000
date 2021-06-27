@@ -81,9 +81,6 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
 
       return (
         <Fragment>
-          <hr />
-
-          <h3>{ translate('views.events.tagSelectorTitle') }</h3>
 
           <TagSelector
             defaultTags={defaultTags}
@@ -91,7 +88,6 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
             onChange={this.onTagFilterChange}
           />
 
-          <hr />
         </Fragment>
       )
     }
@@ -110,7 +106,6 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
             onChange={this.onDateFilterChange}
           />
 
-          <hr />
         </Fragment>
       )
     }
@@ -133,7 +128,6 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
             onChange={this.onPlaceFilterChange}
           />
 
-          <hr />
         </Fragment>
       )
     }
@@ -271,9 +265,11 @@ export default function asInfiniteListCalendar(WrappedListItemComponent, TagSele
     render() {
       return (
         <div className="infinite-list-container__item infinite-list-container__item--full">
-          { this.renderTagSelector() }
-          { this.renderDateSelector() }
-          { this.renderPlaceSelector() }
+          <div className="tags-wrapper">
+            { this.renderTagSelector() }
+            { this.renderDateSelector() }
+            { this.renderPlaceSelector() }
+          </div>
 
           <div className="infinite-list-container infinite-list-container--half-items">
             { this.renderEventList() }
