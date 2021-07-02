@@ -19,6 +19,8 @@ header {
 
 @include media-breakpoint(md) {
   header {
+    padding-right: $header-margin;
+    padding-left: $header-margin;  
     a {font-size: $font-size-xl;}
   }
 }
@@ -28,6 +30,6 @@ header {
     padding-top: 20px;
     padding-right: $header-margin-mobile;
     padding-left: $header-margin-mobile;  
-    a {font-size: $font-size-sm;}
+    a {font-size: $font-size-md;}
   }
 }
