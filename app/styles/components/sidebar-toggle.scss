@@ -8,7 +8,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   
-  padding-top: 20px;
+  padding-top: 30px;
   text-align: center;
 
   color: red;
@@ -37,7 +37,7 @@
 
     content: "";
 
-    background-color: $white;
+    background-color: $black;
 
     opacity: 0;
 
@@ -55,16 +55,16 @@
 
 
 .sidebar-toggle--active {
-  background-color: $white;
+  background-color: $black;
 
   &.sidebar-toggle--notified {
     &::after {
-      background-color: $black;
+      background-color: $white;
     }
   }
 
   &.sidebar-toggle--spinning {
-    border-color: $white;
+    border-color: $black;
 
     &.sidebar-toggle--notified {
       &::after {
