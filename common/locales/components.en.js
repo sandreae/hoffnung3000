@@ -46,7 +46,7 @@ export default {
     activityButton: 'All activites',
     activityTitle: 'Recent activities',
     comingSoon: 'Coming soon!',
-    defaultHeader: 'Welcome to Antiuniversity Festival 2020!',
+    defaultHeader: 'Welcome to Antiuniversity Festival 2021!',
     gifStreamDescription: 'Send .gif animations to our stream with your webcam',
     gifStreamLink: 'Go to STREAM',
     gifStreamTitle: '.gif-stream',
