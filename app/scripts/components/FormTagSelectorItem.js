@@ -21,7 +21,7 @@ class FormTagSelectorItem extends Component {
         key={thisTag}
         onClick={this.handleClick}
       >
-        {label}
+        &#10033;{label}
       </div>
     )
   }
